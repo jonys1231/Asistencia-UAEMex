@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistema de Asistencia</title>
+<title>Asistencia UAEMéx</title>
 
 <style>
 
@@ -14,50 +14,86 @@ box-sizing:border-box;
 }
 
 body{
-font-family:Arial, sans-serif;
+font-family:Arial,sans-serif;
 background:#f4f4f4;
 }
 
+/* INICIO */
+
+#inicio{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0b4f2f,#116d42);
+}
+
+.inicio-card{
+background:white;
+padding:40px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+max-width:450px;
+}
+
+.inicio-card h1{
+color:#0b4f2f;
+margin-bottom:15px;
+}
+
+.inicio-card h2{
+color:#b8860b;
+font-size:40px;
+margin-bottom:10px;
+}
+
+.inicio-card p{
+font-size:22px;
+margin-bottom:25px;
+}
+
+.inicio-card button{
+background:#0b4f2f;
+color:white;
+border:none;
+padding:18px 35px;
+font-size:22px;
+border-radius:15px;
+cursor:pointer;
+}
+
+/* SISTEMA */
+
 .header{
-background:linear-gradient(90deg,#0b4f2f,#116d42);
+background:#0b4f2f;
 color:white;
 text-align:center;
-padding:25px;
+padding:20px;
 }
 
 .header h1{
-font-size:32px;
-}
-
-.header p{
-font-size:18px;
-margin-top:5px;
+font-size:30px;
 }
 
 .contenedor{
 padding:20px;
 }
 
-#titulo{
-text-align:center;
-font-size:22px;
-color:#555;
-}
-
 #contador{
 text-align:center;
-font-size:50px;
-font-weight:bold;
 color:#0b4f2f;
-margin:10px 0;
+font-size:45px;
+font-weight:bold;
+margin-bottom:10px;
 }
 
 .progreso{
 width:90%;
 max-width:700px;
-height:16px;
+height:18px;
 background:#ddd;
-margin:20px auto;
+margin:auto;
 border-radius:20px;
 overflow:hidden;
 }
@@ -70,10 +106,10 @@ background:#0b4f2f;
 
 .tarjeta{
 background:white;
-max-width:750px;
-margin:auto;
-border-radius:25px;
+max-width:800px;
+margin:20px auto;
 padding:30px;
+border-radius:25px;
 box-shadow:0 4px 10px rgba(0,0,0,.15);
 text-align:center;
 }
@@ -84,23 +120,16 @@ font-weight:bold;
 color:#b8860b;
 }
 
-.linea{
-height:2px;
-background:#d4af37;
-margin:20px auto;
-width:90%;
-}
-
 #nombreAlumno{
-font-size:46px;
+margin-top:15px;
+font-size:40px;
 font-weight:bold;
-line-height:1.2;
 color:#0b4f2f;
 }
 
 .botones{
-max-width:750px;
-margin:20px auto;
+max-width:800px;
+margin:auto;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:15px;
@@ -108,10 +137,10 @@ gap:15px;
 
 .boton{
 border:none;
-border-radius:20px;
-padding:35px;
+padding:30px;
 font-size:28px;
 font-weight:bold;
+border-radius:20px;
 color:white;
 cursor:pointer;
 }
@@ -134,37 +163,57 @@ background:#0b4f2f;
 
 #descargar{
 display:none;
-margin-top:20px;
-padding:18px 30px;
-font-size:22px;
+margin:20px auto;
+padding:18px 25px;
+font-size:20px;
+border:none;
 background:#f59e0b;
 color:white;
-border:none;
 border-radius:15px;
 cursor:pointer;
 }
 
+.descarga{
+text-align:center;
+}
+
 .footer{
-margin-top:30px;
+margin-top:20px;
 background:#0b4f2f;
 color:white;
 text-align:center;
-padding:20px;
+padding:15px;
 }
 
 </style>
 </head>
-
 <body>
 
+<div id="inicio">
+
+<div class="inicio-card">
+
+<h1>📋 Asistencia UAEMéx</h1>
+
+<h2>Salón 318</h2>
+
+<p>Grupo 18</p>
+
+<button onclick="iniciarSistema()">
+🚀 Iniciar Pase de Lista
+</button>
+
+</div>
+
+</div>
+
+<div id="sistema" style="display:none;">
+
 <div class="header">
-<h1>UAEMéx</h1>
-<p>Sistema de Asistencia</p>
+<h1>Asistencia UAEMéx</h1>
 </div>
 
 <div class="contenedor">
-
-<div id="titulo">Alumno</div>
 
 <div id="contador"></div>
 
@@ -173,9 +222,11 @@ padding:20px;
 </div>
 
 <div class="tarjeta">
+
 <div id="lista"></div>
-<div class="linea"></div>
+
 <div id="nombreAlumno"></div>
+
 </div>
 
 <div class="botones">
@@ -202,17 +253,21 @@ onclick="siguiente()">
 
 </div>
 
-<div style="text-align:center;">
+<div class="descarga">
+
 <button id="descargar"
 onclick="descargarReporte()">
 📊 Descargar Reporte
 </button>
+
 </div>
 
 </div>
 
 <div class="footer">
-Sistema de Asistencia Grupo 18
+Salón 318 - Grupo 18
+</div>
+
 </div>
 
 <script>
@@ -262,6 +317,12 @@ const alumnos = [
 let actual = 0;
 let asistencias = {};
 
+function iniciarSistema(){
+document.getElementById("inicio").style.display="none";
+document.getElementById("sistema").style.display="block";
+mostrarAlumno();
+}
+
 function mostrarAlumno(){
 
 document.getElementById("lista").textContent =
@@ -271,13 +332,13 @@ document.getElementById("nombreAlumno").textContent =
 alumnos[actual].nombre;
 
 document.getElementById("contador").textContent =
-(actual + 1) + " de " + alumnos.length;
+(alumnos[actual].lista) + " de " + alumnos.length;
 
-let porcentaje =
+let progreso =
 ((actual + 1) / alumnos.length) * 100;
 
 document.getElementById("barra").style.width =
-porcentaje + "%";
+progreso + "%";
 
 }
 
@@ -317,23 +378,8 @@ mostrarAlumno();
 
 function descargarReporte(){
 
-const ahora = new Date();
-
-const fecha =
-ahora.getFullYear()+"-"+
-String(ahora.getMonth()+1).padStart(2,"0")+"-"+
-String(ahora.getDate()).padStart(2,"0");
-
-const hora =
-String(ahora.getHours()).padStart(2,"0")+"-"+
-String(ahora.getMinutes()).padStart(2,"0");
-
-let csv = "";
-
-csv += "REPORTE DE ASISTENCIA\r\n";
-csv += "Fecha," + fecha + "\r\n";
-csv += "Hora," + hora.replace("-",":") + "\r\n\r\n";
-csv += "Lista,Alumno,Asistencia\r\n";
+let csv =
+"Lista,Alumno,Asistencia\r\n";
 
 Object.values(asistencias).forEach(registro => {
 
@@ -344,17 +390,19 @@ registro.Asistencia + "\r\n";
 
 });
 
-const blob = new Blob(
-[csv],
-{type:"text/csv;charset=utf-8;"}
-);
+const blob =
+new Blob([csv],{
+type:"text/csv;charset=utf-8;"
+});
 
-const enlace = document.createElement("a");
+const enlace =
+document.createElement("a");
 
-enlace.href = URL.createObjectURL(blob);
+enlace.href =
+URL.createObjectURL(blob);
 
 enlace.download =
-"Asistencia_" + fecha + "_" + hora + ".csv";
+"Reporte_Asistencia_Grupo18.csv";
 
 document.body.appendChild(enlace);
 
@@ -363,8 +411,6 @@ enlace.click();
 document.body.removeChild(enlace);
 
 }
-
-mostrarAlumno();
 
 </script>
 
